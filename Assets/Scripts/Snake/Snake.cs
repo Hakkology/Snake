@@ -61,11 +61,22 @@ public class Snake : MonoBehaviour
         _snakeList.Add(kuyruk);
     }
 
+    public List<Transform> GetSnakeSegments()
+    {
+        return _snakeList;
+    }
+
     void OnTriggerEnter2D(Collider2D other) 
     {
         if (other.gameObject.layer == LayerMask.NameToLayer("Food"))
         {
             Grow();
+            ScoreEvents.AddScore(10);
+        }
+
+        if (other.gameObject.layer == LayerMask.NameToLayer("Wall") || other.gameObject.layer == LayerMask.NameToLayer("Snake"))
+        {
+            HealthEvents.TakeDamage(1);
         }
     }
 }
