@@ -4,6 +4,7 @@ using Commands;
 using UnityEngine;
 public class Snake : MonoBehaviour
 {
+    public Transform SnakePrefab;
     private Vector2 _snakeDir = Vector2.right;
 
     private readonly ISnakeCommand _upCommand = new MoveUpCommand();
@@ -12,6 +13,12 @@ public class Snake : MonoBehaviour
     private readonly ISnakeCommand _rightCommand = new MoveRightCommand();
 
     private readonly Queue<ISnakeCommand> _commandQueue = new();
+    private List<Transform> _snakeList = new List<Transform>();
+
+    void Start() 
+    {
+        _snakeList.Add(transform);
+    }
 
     void Update()
     {
@@ -23,6 +30,11 @@ public class Snake : MonoBehaviour
 
     void FixedUpdate()
     {
+        for (int i = _snakeList.Count -1; i > 0; i--)
+        {
+            _snakeList[i].position = _snakeList[i-1].position;
+        }
+
         if (_commandQueue.Count > 0)
         {
             var command = _commandQueue.Dequeue();
@@ -42,5 +54,18 @@ public class Snake : MonoBehaviour
         _snakeDir = dir;
     }
 
-    public Vector2 CurrentDirection => _snakeDir;
+    private void Grow()
+    {
+        Transform kuyruk = Instantiate(SnakePrefab);
+        kuyruk.position = _snakeList[_snakeList.Count - 1].position;
+        _snakeList.Add(kuyruk);
+    }
+
+    void OnTriggerEnter2D(Collider2D other) 
+    {
+        if (other.gameObject.layer == LayerMask.NameToLayer("Food"))
+        {
+            Grow();
+        }
+    }
 }

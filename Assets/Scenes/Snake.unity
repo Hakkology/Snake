@@ -293,6 +293,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f1058b1ef6e0e14e90ac189bfa17460, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  SnakePrefab: {fileID: 4515065768080726227, guid: a9145c04c031dd428b70745eb221a8b4, type: 3}
 --- !u!1 &356972047
 GameObject:
   m_ObjectHideFlags: 0
@@ -1059,7 +1060,7 @@ GameObject:
   - component: {fileID: 1324963596}
   - component: {fileID: 1324963598}
   - component: {fileID: 1324963599}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Food
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1191,9 +1192,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   foodArea: {fileID: 1323236847}
-  snakeLayer:
-    serializedVersion: 2
-    m_Bits: 8
 --- !u!1 &1679431807
 GameObject:
   m_ObjectHideFlags: 0
