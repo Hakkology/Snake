@@ -77,6 +77,23 @@ public class Snake : MonoBehaviour
         if (other.gameObject.layer == LayerMask.NameToLayer("Wall") || other.gameObject.layer == LayerMask.NameToLayer("Snake"))
         {
             HealthEvents.TakeDamage(1);
+            ResetSnake();
         }
+    }
+
+    public void ResetSnake()
+    {
+        // Kuyrukları temizle
+        for (int i = _snakeList.Count - 1; i > 0; i--)
+        {
+            Destroy(_snakeList[i].gameObject);
+        }
+
+        _snakeList.Clear();
+        _snakeList.Add(transform);
+        transform.position = Vector3.zero;
+        _snakeDir = Vector2.right;
+
+        Debug.Log("Yılan sıfırlandı.");
     }
 }
