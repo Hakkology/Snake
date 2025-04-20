@@ -3,7 +3,7 @@ using UnityEngine;
 public class HealthManager : MonoBehaviour
 {
     public int maxHealth = 3;
-    private int currentHealth;
+    public int CurrentHealth;
 
     private void OnEnable()
     {
@@ -24,10 +24,10 @@ public class HealthManager : MonoBehaviour
 
     private void TakeDamage(int amount)
     {
-        currentHealth -= amount;
-        Debug.Log("Can: " + currentHealth);
+        CurrentHealth -= amount;
+        Debug.Log("Can: " + CurrentHealth);
 
-        if (currentHealth <= 0)
+        if (CurrentHealth <= 0)
         {
             Debug.Log("Can bitti, oyunu bitiriyoruz.");
             GameManager.Instance.SetState(GameState.MainMenu); 
@@ -36,7 +36,7 @@ public class HealthManager : MonoBehaviour
 
     private void ResetHealth()
     {
-        currentHealth = maxHealth;
-        Debug.Log("Can sıfırlandı: " + currentHealth);
+        CurrentHealth = maxHealth;
+        Debug.Log("Can sıfırlandı: " + CurrentHealth);
     }
 }

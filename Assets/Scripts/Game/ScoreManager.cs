@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class ScoreManager : MonoBehaviour
 {
-    private int _score;
+    public int Score;
 
     private void OnEnable()
     {
@@ -18,13 +18,13 @@ public class ScoreManager : MonoBehaviour
 
     private void AddScore(int amount)
     {
-        _score += amount;
-        Debug.Log("Skor: " + _score);
+        Score += amount;
+        Debug.Log("Skor: " + Score);
     }
 
     private void ResetScore()
     {
-        _score = 0;
+        Score = 0;
         Debug.Log("Skor sıfırlandı.");
     }
 }
