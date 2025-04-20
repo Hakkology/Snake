@@ -1,0 +1,9 @@
+using UnityEngine;
+
+namespace Commands
+{
+    public class MoveDownCommand : ISnakeCommand
+    {
+        public void Execute(Snake snake) => snake.SetDirection(Vector2.down);
+    }
+}
