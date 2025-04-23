@@ -18,6 +18,8 @@ public class Snake : MonoBehaviour
     private readonly Queue<ISnakeCommand> _commandQueue = new();
     private List<Transform> _snakeList = new List<Transform>();
 
+    public YellowFlashController yellowFlash;
+
     void Start() 
     {
         _snakeList.Add(transform);
@@ -62,6 +64,14 @@ public class Snake : MonoBehaviour
         Transform kuyruk = Instantiate(SnakePrefab);
         kuyruk.position = _snakeList[_snakeList.Count - 1].position;
         _snakeList.Add(kuyruk);
+
+        // optional
+        if (yellowFlash != null)
+        {
+            float flashAmount = 0.2f;
+            yellowFlash.Flash(flashAmount, 0.25f);
+            Debug.Log("FLASH TETİKLENDİ");
+        }
     }
 
     public List<Transform> GetSnakeSegments()
@@ -101,4 +111,6 @@ public class Snake : MonoBehaviour
 
         Debug.Log("Yılan sıfırlandı.");
     }
+
+
 }
