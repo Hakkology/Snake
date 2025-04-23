@@ -1,6 +1,6 @@
 # 🐍 Snake
 
-Unity URP kullanılarak sıfırdan geliştirilen basit bir Snake (Yılan) oyunudur.
+Unity Universal 2D kullanılarak sıfırdan geliştirilen basit bir Snake (Yılan) oyunudur.
 
 ## Amaç
 
