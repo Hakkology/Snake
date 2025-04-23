@@ -5,6 +5,9 @@ using UnityEngine;
 public class Snake : MonoBehaviour
 {
     public Transform SnakePrefab;
+    public ScoreManager scoreManager;
+    public HealthManager healthManager;
+
     private Vector2 _snakeDir = Vector2.right;
 
     private readonly ISnakeCommand _upCommand = new MoveUpCommand();
@@ -71,15 +74,17 @@ public class Snake : MonoBehaviour
         if (other.gameObject.layer == LayerMask.NameToLayer("Food"))
         {
             Grow();
-            ScoreEvents.AddScore(10);
+            scoreManager.AddScore(10); // ✅ Mantık burada, event içerde tetikleniyor
         }
 
-        if (other.gameObject.layer == LayerMask.NameToLayer("Wall") || other.gameObject.layer == LayerMask.NameToLayer("Snake"))
+        if (other.gameObject.layer == LayerMask.NameToLayer("Wall") || 
+            other.gameObject.layer == LayerMask.NameToLayer("Snake"))
         {
-            HealthEvents.TakeDamage(1);
+            healthManager.ApplyDamage(1); // ✅ Doğrudan çağrı
             ResetSnake();
         }
     }
+
 
     public void ResetSnake()
     {

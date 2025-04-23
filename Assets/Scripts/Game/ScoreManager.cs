@@ -2,29 +2,22 @@ using UnityEngine;
 
 public class ScoreManager : MonoBehaviour
 {
-    public int Score;
+    public int Score { get; private set; }
 
-    private void OnEnable()
+    private void Start()
     {
-        ScoreEvents.OnScoreAdded += AddScore;
-        ScoreEvents.OnScoreReset += ResetScore;
+        ResetScore();
     }
 
-    private void OnDisable()
-    {
-        ScoreEvents.OnScoreAdded -= AddScore;
-        ScoreEvents.OnScoreReset -= ResetScore;
-    }
-
-    private void AddScore(int amount)
+    public void AddScore(int amount)
     {
         Score += amount;
-        Debug.Log("Skor: " + Score);
+        ScoreEvents.UpdateScore(Score);
     }
 
-    private void ResetScore()
+    public void ResetScore()
     {
         Score = 0;
-        Debug.Log("Skor sıfırlandı.");
+        ScoreEvents.UpdateScore(Score);
     }
 }

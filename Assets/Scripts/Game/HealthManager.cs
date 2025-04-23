@@ -3,19 +3,7 @@ using UnityEngine;
 public class HealthManager : MonoBehaviour
 {
     public int maxHealth = 3;
-    public int CurrentHealth;
-
-    private void OnEnable()
-    {
-        HealthEvents.OnDamageTaken += TakeDamage;
-        HealthEvents.OnHealthReset += ResetHealth;
-    }
-
-    private void OnDisable()
-    {
-        HealthEvents.OnDamageTaken -= TakeDamage;
-        HealthEvents.OnHealthReset -= ResetHealth;
-    }
+    private int currentHealth;
 
     private void Start()
     {
@@ -24,19 +12,33 @@ public class HealthManager : MonoBehaviour
 
     private void TakeDamage(int amount)
     {
-        CurrentHealth -= amount;
-        Debug.Log("Can: " + CurrentHealth);
+        currentHealth -= amount;
+        HealthEvents.UpdateHealth(currentHealth);
 
-        if (CurrentHealth <= 0)
+        Debug.Log("Can: " + currentHealth);
+
+        if (currentHealth <= 0)
         {
             Debug.Log("Can bitti, oyunu bitiriyoruz.");
-            GameManager.Instance.SetState(GameState.MainMenu); 
+            GameManager.Instance.SetState(GameState.MainMenu);
         }
     }
 
     private void ResetHealth()
     {
-        CurrentHealth = maxHealth;
-        Debug.Log("Can sıfırlandı: " + CurrentHealth);
+        currentHealth = maxHealth;
+        HealthEvents.UpdateHealth(currentHealth);
+        Debug.Log("Can sıfırlandı: " + currentHealth);
+    }
+
+    // dışarıdan çağırmak için:
+    public void ApplyDamage(int amount)
+    {
+        TakeDamage(amount);
+    }
+
+    public void FullHeal()
+    {
+        ResetHealth();
     }
 }

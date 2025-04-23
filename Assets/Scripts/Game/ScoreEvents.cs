@@ -2,9 +2,10 @@ using System;
 
 public static class ScoreEvents
 {
-    public static event Action<int> OnScoreAdded;
-    public static event Action OnScoreReset;
+    public static event Action<int> OnScoreChanged;
 
-    public static void AddScore(int amount) => OnScoreAdded?.Invoke(amount);
-    public static void ResetScore() => OnScoreReset?.Invoke();
+    public static void UpdateScore(int newValue)
+    {
+        OnScoreChanged?.Invoke(newValue);
+    }
 }
