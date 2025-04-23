@@ -84,7 +84,13 @@ public class Snake : MonoBehaviour
         if (other.gameObject.layer == LayerMask.NameToLayer("Food"))
         {
             Grow();
-            scoreManager.AddScore(10); // ✅ Mantık burada, event içerde tetikleniyor
+            scoreManager.AddScore(10);
+        }
+
+        if (other.gameObject.layer == LayerMask.NameToLayer("GoodFood"))
+        {
+            Grow();
+            scoreManager.AddScore(30); 
         }
 
         if (other.gameObject.layer == LayerMask.NameToLayer("Wall") || 
